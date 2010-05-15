@@ -12,7 +12,10 @@ def canonical_author(author):
     print "Don't know who {1} is!".format(author)
     return author
 
-def list_commit_times(repository):
+def get_object_contents(repository, hash):
+    return repository.object_store[hash].get_data().splitlines(True)
+
+def list_commit_info(repository):
     differ = Differ()
     for rev in repository.revision_history(repository.head()):
         parentCommits = rev.get_parents()
@@ -24,15 +27,15 @@ def list_commit_times(repository):
 
             for (_, _, (fromSHA, toSHA)) in changes:
                 if (not fromSHA) and toSHA:
-                    insertions += len(repository.object_store[toSHA].get_data().splitlines(True))
+                    insertions += len(get_object_contents(repository, toSHA))
                     continue
 
                 if (not toSHA) and fromSHA:
-                    deletions += len(repository.object_store[fromSHA].get_data().splitlines(True))
+                    deletions += len(get_object_contents(repository, fromSHA))
                     continue
 
-                fromFile = repository.object_store[fromSHA].get_data().splitlines(True)
-                toFile = repository.object_store[toSHA].get_data().splitlines(True)
+                fromFile = get_object_contents(repository, fromSHA)
+                toFile = get_object_contents(repository, toSHA)
 
                 diff = differ.compare(fromFile, toFile)
 
@@ -44,7 +47,8 @@ def list_commit_times(repository):
 
         yield (canonical_author(rev.author),
                date.fromtimestamp(rev.author_time),
-               basename(repository.path), insertions, deletions)
+               basename(repository.path),
+               insertions, deletions)
 
 repository = Repo("/Users/hortont/Desktop/particles")
-print(list(list_commit_times(repository)))
+print(list(list_commit_info(repository)))
