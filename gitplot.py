@@ -8,11 +8,11 @@ from collections import defaultdict
 import cProfile
 
 def canonical_author(author):
-    if author.find("hortont") > 0:
+    if author.find("hortont") > 0 or author.find("MBS-Signout") > 0:
         return "Tim"
     elif author.find("natesm") > 0:
         return "Nate"
-    elif author.find("racarr") > 0:
+    elif author.find("racarr") > 0 or author.find("carrr") > 0:
         return "Robb"
     elif author.find("arsenm") > 0:
         return "Matt"
