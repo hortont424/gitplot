@@ -8,8 +8,10 @@ from pprint import pprint
 
 def canonical_author(author):
     if author.find("hortont") > 0:
-        return "hortont"
-    print "Don't know who {1} is!".format(author)
+        return "Tim"
+    elif author.find("natesm") > 0:
+        return "Nate"
+    print "Don't know who {0} is!".format(author)
     return author
 
 def get_object_contents(repository, hash):
@@ -50,5 +52,7 @@ def list_commit_info(repository):
                basename(repository.path),
                insertions, deletions)
 
-repository = Repo("/Users/hortont/Desktop/particles")
-print(list(list_commit_info(repository)))
+repositories = ["/Users/hortont/src/orbitals",
+                "/Users/hortont/src/Average-Lapse"]
+
+print [list(list_commit_info(Repo(r))) for r in repositories]
