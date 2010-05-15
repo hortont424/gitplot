@@ -81,7 +81,15 @@ def mathematica_stacked_bar_chart(data):
 repositories = ["/Users/hortont/src/Average-Lapse", "/Users/hortont/src/same",
                 "/Users/hortont/src/orbitals", "/Users/hortont/src/phiface",
                 "/Users/hortont/src/particles", "/Users/hortont/src/mbp-video-status",
-                "/Users/hortont/src/seed", "/Users/hortont/src/sheeple", "/Users/hortont/Sites"]
+                "/Users/hortont/src/seed", "/Users/hortont/src/sheeple",
+                "/Users/hortont/Sites", "/Users/hortont/src/scripts",
+                "/Users/hortont/src/mbs-computerlab-signout",
+                "/Users/hortont/src/mandelbrot", "/Users/hortont/src/gltd",
+                "/Users/hortont/src/wanda", "/Users/hortont/src/glsl-life-saver",
+                "/Users/hortont/src/ease", "/Users/hortont/src/configs",
+                "/Users/hortont/src/libtetris", "/Users/hortont/src/carmen",
+                "/Users/hortont/src/induction", "/Users/hortont/src/cocoa-schedule-prettyprinter",
+                "/Users/hortont/src/aperture-viewer", "/Users/hortont/src/piano-stairs"]
 commitData = []
 
 def main():
