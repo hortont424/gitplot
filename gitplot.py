@@ -8,13 +8,13 @@ from collections import defaultdict
 import cProfile
 
 def canonical_author(author):
-    if author.find("hortont") > 0 or author.find("MBS-Signout") > 0:
+    if author.find("hortont") >= 0 or author.find("MBS-Signout") >= 0:
         return "Tim"
-    elif author.find("natesm") > 0:
+    elif author.find("natesm") >= 0:
         return "Nate"
-    elif author.find("racarr") > 0 or author.find("carrr") > 0:
+    elif author.find("racarr") >= 0 or author.find("carrr") >= 0:
         return "Robb"
-    elif author.find("arsenm") > 0:
+    elif author.find("arsenm") >= 0:
         return "Matt"
     print "Don't know who {0} is!".format(author)
     return author
@@ -24,7 +24,7 @@ def get_object_contents(repository, hash):
 
 def list_commit_info(repository):
     for rev in repository.revision_history(repository.head()):
-        parentCommits = rev.get_parents()
+        parentCommits = rev._get_parents()
         insertions = 0
 
         for parent in parentCommits:
@@ -82,18 +82,24 @@ repositories = ["/Users/hortont/src/Average-Lapse", "/Users/hortont/src/same",
                 "/Users/hortont/src/orbitals", "/Users/hortont/src/phiface",
                 "/Users/hortont/src/particles", "/Users/hortont/src/mbp-video-status",
                 "/Users/hortont/src/seed", "/Users/hortont/src/sheeple",
-                "/Users/hortont/Sites", "/Users/hortont/src/scripts",
+                "/Users/hortont/src/scripts",
                 "/Users/hortont/src/mbs-computerlab-signout",
                 "/Users/hortont/src/mandelbrot", "/Users/hortont/src/gltd",
                 "/Users/hortont/src/wanda", "/Users/hortont/src/glsl-life-saver",
-                "/Users/hortont/src/ease", "/Users/hortont/src/configs",
+                "/Users/hortont/src/ease",
                 "/Users/hortont/src/libtetris", "/Users/hortont/src/carmen",
                 "/Users/hortont/src/induction", "/Users/hortont/src/cocoa-schedule-prettyprinter",
-                "/Users/hortont/src/aperture-viewer", "/Users/hortont/src/piano-stairs"]
+                "/Users/hortont/src/aperture-viewer",
+                "/Users/hortont/src/notebook", "/Users/hortont/src/s3monitor", "/Users/hortont/src/monitor",
+                "/Users/hortont/src/contrasty", "/Users/hortont/src/music-of-the-spheres",
+                "/Users/hortont/src/KeyboardShuffle", "/Users/hortont/src/arduino",
+                "/Users/hortont/src/schedules", "/Users/hortont/src/email-stats",
+                "/Users/hortont/src/timeline", "/Users/hortont/src/guesscc"]
 commitData = []
 
 def main():
     for repoPath in repositories:
+        print repoPath
         commitData.extend(list(list_commit_info(Repo(repoPath))))
 
     chartData = single_author_stacked_bar_chart(commitData, "Tim")
